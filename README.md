@@ -35,8 +35,14 @@ Desktop   → Windows apps con IA local (en desarrollo)
 ## Actividad
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=fguzman-stack&show_icons=true&theme=tokyonight&hide_border=true&count_private=true" height="150" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=fguzman-stack&layout=compact&theme=tokyonight&hide_border=true" height="150" />
+  <img src="https://skillicons.dev?icons=kotlin,react,typescript,vite,tailwind,firebase,python,git" alt="Stack" />
+</p>
+
+<p align="center">
+  <img src="https://img.shields.io/github/followers/fguzman-stack?style=for-the-badge&logo=github&labelColor=0d1117&color=9B7BFF" alt="Followers" />
+  <img src="https://img.shields.io/github/stars/fguzman-stack/MiPresentacion?style=for-the-badge&label=stars%20portafolio&color=9B7BFF" alt="Stars portafolio" />
+  <img src="https://img.shields.io/github/stars/fguzman-stack/CodePet?style=for-the-badge&label=stars%20CodePet&color=54DCFF" alt="Stars CodePet" />
+  <img src="https://img.shields.io/github/last-commit/fguzman-stack/MiPresentacion?style=for-the-badge&label=ultimo%20commit&color=FF63B8" alt="Ultimo commit" />
 </p>
 
 ---
