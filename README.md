@@ -30,7 +30,7 @@
 
 | Repo | Aporte | Estado |
 |------|--------|--------|
-| [DDOneApps/Phony](https://github.com/DDOneApps/Phony) | Metadata F-Droid para publicar la app 2.6 (#62) · fix comando ADB Calling Accounts en Android 17+ (#63, cierra #7) · iconos `AutoMirrored` para soporte RTL (#64) | [PRs abiertos](https://github.com/DDOneApps/Phony/pulls?q=is%3Apr+author%3Afguzman-stack) |
+| [DDOneApps/Phony](https://github.com/DDOneApps/Phony) | Metadata F-Droid para publicar la app 2.6 (#62) · fix comando ADB Calling Accounts en Android 17+ (#63 (#7)) · iconos `AutoMirrored` para soporte RTL (#64) | [PRs abiertos](https://github.com/DDOneApps/Phony/pulls?q=is%3Apr+author%3Afguzman-stack) |
 | [legalize-dev/legalize-pipeline](https://github.com/legalize-dev/legalize-pipeline) ([proyecto](https://github.com/legalize-dev/legalize-es) 🇪🇸 — 12 000+ leyes españolas en git) | Suite de tests inutilizable en Windows (UTF-8 vs cp1252): 13 fixes de encoding, 0 → 2014 tests pasando (#137) · triage de 30 fallos restantes Windows con causas raíz (#138) | [PR + issue](https://github.com/legalize-dev/legalize-pipeline/pull/137) |
 
 ## Stack
