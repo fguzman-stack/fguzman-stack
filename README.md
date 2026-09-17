@@ -23,6 +23,16 @@
 | [MiPresentacion](https://github.com/fguzman-stack/MiPresentacion) | React · Vite · Tailwind · TS | 🌌 Este portafolio: mapa de constelaciones, i18n ES/EN/PT/FR |
 | [DocuMind AI](https://github.com/fguzman-stack/DocuMind-Ai-Web) | Python · IA local | 🧠 Documentos con IA 100% local (Windows, en proceso) |
 
+## Colaboraciones open source / OSS contributions
+
+**🇨🇱 Contribuyo activamente a proyectos open source de terceros** — leyendo código, encontrando bugs reproducibles y enviando PRs verificados.
+**🇺🇸 Actively contributing to third-party open source** — reading unfamiliar code, finding reproducible bugs, and shipping verified PRs.
+
+| Repo | Aporte | Estado |
+|------|--------|--------|
+| [DDOneApps/Phony](https://github.com/DDOneApps/Phony) | Metadata F-Droid para publicar la app 2.6 (#62) · fix comando ADB Calling Accounts en Android 17+ (#63, cierra #7) · iconos `AutoMirrored` para soporte RTL (#64) | [PRs abiertos](https://github.com/DDOneApps/Phony/pulls?q=is%3Apr+author%3Afguzman-stack) |
+| [legalize-dev/legalize-pipeline](https://github.com/legalize-dev/legalize-pipeline) ([proyecto](https://github.com/legalize-dev/legalize-es) 🇪🇸 — 12 000+ leyes españolas en git) | Suite de tests inutilizable en Windows (UTF-8 vs cp1252): 13 fixes de encoding, 0 → 2014 tests pasando (#137) · triage de 30 fallos restantes Windows con causas raíz (#138) | [PR + issue](https://github.com/legalize-dev/legalize-pipeline/pull/137) |
+
 ## Stack
 
 ```
@@ -53,8 +63,14 @@ Desktop   → Windows apps con IA local (en desarrollo)
   <img src="https://img.shields.io/github/last-commit/fguzman-stack/MiPresentacion?style=for-the-badge&label=ultimo%20commit&color=FF63B8" alt="Ultimo commit" />
 </p>
 
+<p align="center">
+  <img src="https://github-readme-stats.vercel.app/api?username=fguzman-stack&show_icons=true&count_private=true&theme=tokyonight&hide_border=true&title_color=9B7BFF&icon_color=FF63B8" alt="GitHub stats" height="160" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=fguzman-stack&layout=compact&theme=tokyonight&hide_border=true&title_color=9B7BFF&langs_count=8" alt="Top langs" height="160" />
+</p>
+
 ---
 
 <p align="center">
   <sub>Hecho con 💜 desde Chile · Portfolio: <a href="https://miportafolio-fguz.vercel.app/">miportafolio-fguz.vercel.app</a></sub>
 </p>
+
