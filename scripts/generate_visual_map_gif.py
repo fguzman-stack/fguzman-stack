@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Generate a retro 1-bit VISUAL.MAP GIF for a GitHub profile README.
+"""Generate a retro VISUAL.MAP GIF for a GitHub profile README.
 
-Default output is a neon-magenta particle Tux drawn with a serpentine scan.
-Optionally pass --input path/to/image.png to use your own silhouette.
+The default animation is an original 1-bit/terminal inspired particle map of
+Tux with a continuous serpentine scanner. You can also pass --input to convert
+your own logo/image into the same animated particle map.
 """
 
 from __future__ import annotations
@@ -16,21 +17,27 @@ from PIL import Image, ImageDraw, ImageFilter, ImageFont, ImageOps
 
 WIDTH = 300
 HEIGHT = 340
+
 BG = "#0b0f19"
-PANEL = "#111827"
-BORDER = "#f472b6"
-DIM = "#394150"
-TEXT = "#f8c7df"
+PANEL = "#0f1625"
+GRID = "#172235"
+GRID_HOT = "#26364f"
+BORDER = "#ff4fb8"
+TEXT = "#ffd1ec"
 MUTED = "#8b5d75"
 NEON = "#ff4fb8"
-NEON_HOT = "#ffd1ec"
+NEON_SOFT = "#bf2f86"
+NEON_DIM = "#4a203a"
+HOT = "#fff0fa"
+CYAN = "#67e8f9"
+AMBER = "#fbbf24"
 
-GRID_W = 36
-GRID_H = 34
-CELL = 6
-DOT = 2
-MAP_X = 42
-MAP_Y = 58
+MAP_X = 34
+MAP_Y = 55
+CELL = 4
+GRID_W = 58
+GRID_H = 54
+DOT = 1
 
 
 def load_font(size: int) -> ImageFont.ImageFont:
@@ -47,147 +54,235 @@ def load_font(size: int) -> ImageFont.ImageFont:
     return ImageFont.load_default()
 
 
+FONT_8 = load_font(8)
 FONT_9 = load_font(9)
 FONT_10 = load_font(10)
 FONT_12 = load_font(12)
 
 
-def tux_mask(x: float, y: float) -> bool:
-    """Return True when normalized coordinates are inside a chunky Tux shape."""
-    body = ((x / 0.72) ** 2 + ((y - 0.08) / 0.86) ** 2) < 1.0
-    head = ((x / 0.47) ** 2 + ((y + 0.64) / 0.36) ** 2) < 1.0
-    left_flipper = (((x + 0.61) / 0.22) ** 2 + ((y - 0.08) / 0.55) ** 2) < 1.0
-    right_flipper = (((x - 0.61) / 0.22) ** 2 + ((y - 0.08) / 0.55) ** 2) < 1.0
-    left_foot = (((x + 0.32) / 0.31) ** 2 + ((y - 0.79) / 0.16) ** 2) < 1.0
-    right_foot = (((x - 0.32) / 0.31) ** 2 + ((y - 0.79) / 0.16) ** 2) < 1.0
-    belly_cut = ((x / 0.42) ** 2 + ((y - 0.2) / 0.52) ** 2) < 1.0
-    face_cut = ((x / 0.31) ** 2 + ((y + 0.57) / 0.21) ** 2) < 1.0
-    return (body or head or left_flipper or right_flipper or left_foot or right_foot) and not (
-        belly_cut or face_cut
-    )
+def layer(size: int = 240) -> tuple[Image.Image, ImageDraw.ImageDraw]:
+    image = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    return image, ImageDraw.Draw(image)
 
 
-def default_points() -> list[tuple[int, int]]:
-    points: list[tuple[int, int]] = []
+def draw_default_tux_mask(size: int = 240) -> Image.Image:
+    """Build a detailed, original Tux-ish mask using vector primitives.
+
+    Colors encode particle groups:
+    magenta = shell/body, pink = belly/face cuts, cyan = eyes, amber = beak/feet.
+    """
+    image, draw = layer(size)
+    s = size / 240
+
+    def box(x1: int, y1: int, x2: int, y2: int) -> tuple[int, int, int, int]:
+        return (round(x1 * s), round(y1 * s), round(x2 * s), round(y2 * s))
+
+    shell = (255, 79, 184, 255)
+    soft = (190, 47, 134, 255)
+    hot = (255, 209, 236, 255)
+    cyan = (103, 232, 249, 255)
+    amber = (251, 191, 36, 255)
+
+    # Feet and shadow anchors first, so body particles sit above them.
+    draw.ellipse(box(43, 190, 111, 223), fill=amber)
+    draw.ellipse(box(129, 190, 197, 223), fill=amber)
+    draw.rectangle(box(73, 202, 168, 213), fill=soft)
+
+    # Flippers/wings.
+    draw.ellipse(box(24, 86, 84, 193), fill=shell)
+    draw.ellipse(box(156, 86, 216, 193), fill=shell)
+    draw.polygon([(48, 112), (23, 168), (58, 154)], fill=hot)
+    draw.polygon([(192, 112), (217, 168), (182, 154)], fill=hot)
+
+    # Body and head.
+    draw.ellipse(box(55, 78, 185, 211), fill=shell)
+    draw.ellipse(box(64, 22, 176, 126), fill=shell)
+
+    # Belly/face openings keep the tuxedo shape readable in a particle grid.
+    draw.ellipse(box(82, 101, 158, 198), fill=soft)
+    draw.ellipse(box(78, 53, 162, 112), fill=hot)
+    draw.polygon([(120, 99), (96, 151), (144, 151)], fill=hot)
+
+    # Head contour and ears/top pixels.
+    draw.rectangle(box(82, 31, 158, 44), fill=shell)
+    draw.rectangle(box(94, 20, 110, 35), fill=shell)
+    draw.rectangle(box(130, 20, 146, 35), fill=shell)
+
+    # Eyes, beak, tuxedo chest pixels.
+    draw.ellipse(box(88, 66, 106, 84), fill=cyan)
+    draw.ellipse(box(134, 66, 152, 84), fill=cyan)
+    draw.rectangle(box(93, 70, 101, 78), fill=(5, 8, 14, 255))
+    draw.rectangle(box(139, 70, 147, 78), fill=(5, 8, 14, 255))
+    draw.polygon([(120, 84), (101, 99), (139, 99)], fill=amber)
+    draw.polygon([(120, 101), (106, 113), (134, 113)], fill=amber)
+    draw.rectangle(box(114, 140, 126, 167), fill=shell)
+    draw.rectangle(box(101, 151, 112, 162), fill=shell)
+    draw.rectangle(box(128, 151, 139, 162), fill=shell)
+
+    # Add a hard pixelated edge so the particle extraction feels less blobby.
+    alpha = image.getchannel("A")
+    edge = alpha.filter(ImageFilter.FIND_EDGES).point(lambda p: 255 if p > 20 else 0)
+    edge_rgba = Image.new("RGBA", image.size, (255, 79, 184, 0))
+    edge_rgba.putalpha(edge)
+    image = Image.alpha_composite(image, edge_rgba)
+    return image
+
+
+def default_points() -> list[tuple[int, int, str]]:
+    mask = draw_default_tux_mask().resize((GRID_W, GRID_H), Image.Resampling.LANCZOS)
+    points: list[tuple[int, int, str]] = []
     for gy in range(GRID_H):
         for gx in range(GRID_W):
-            nx = (gx / (GRID_W - 1)) * 2 - 1
-            ny = (gy / (GRID_H - 1)) * 2 - 1
-            if tux_mask(nx, ny):
-                points.append((gx, gy))
+            r, g, b, a = mask.getpixel((gx, gy))
+            if a < 42:
+                continue
+            if g > 180 and b > 180:
+                part = "eye"
+            elif r > 220 and 120 < g < 220 and b < 90:
+                part = "beak"
+            elif r > 235 and g > 150 and b > 190:
+                part = "hot"
+            elif r > 150 and b > 100:
+                part = "soft"
+            else:
+                part = "body"
+            points.append((gx, gy, part))
     return points
 
 
-def points_from_image(path: Path) -> list[tuple[int, int]]:
+def points_from_image(path: Path) -> list[tuple[int, int, str]]:
     image = Image.open(path).convert("RGBA")
     alpha = image.getchannel("A")
     gray = ImageOps.grayscale(image)
     mask = Image.new("L", image.size, 0)
     mask.paste(gray, mask=alpha)
     mask = ImageOps.autocontrast(mask).resize((GRID_W, GRID_H), Image.Resampling.LANCZOS)
-    points: list[tuple[int, int]] = []
+    points: list[tuple[int, int, str]] = []
     for gy in range(GRID_H):
         for gx in range(GRID_W):
-            if mask.getpixel((gx, gy)) > 72:
-                points.append((gx, gy))
+            value = mask.getpixel((gx, gy))
+            if value > 44:
+                points.append((gx, gy, "hot" if value > 170 else "body"))
     return points
 
 
-def serpentine(points: list[tuple[int, int]]) -> list[tuple[int, int]]:
-    point_set = set(points)
-    ordered: list[tuple[int, int]] = []
+def serpentine(points: list[tuple[int, int, str]]) -> list[tuple[int, int, str]]:
+    by_coord = {(gx, gy): part for gx, gy, part in points}
+    ordered: list[tuple[int, int, str]] = []
     for gy in range(GRID_H):
         xs = range(GRID_W) if gy % 2 == 0 else range(GRID_W - 1, -1, -1)
         for gx in xs:
-            if (gx, gy) in point_set:
-                ordered.append((gx, gy))
+            part = by_coord.get((gx, gy))
+            if part:
+                ordered.append((gx, gy, part))
     return ordered
-
-
-def draw_corner(draw: ImageDraw.ImageDraw, x: int, y: int, sx: int, sy: int) -> None:
-    size = 15
-    draw.line((x, y, x + sx * size, y), fill=BORDER, width=1)
-    draw.line((x, y, x, y + sy * size), fill=BORDER, width=1)
-
-
-def draw_base() -> Image.Image:
-    image = Image.new("RGB", (WIDTH, HEIGHT), BG)
-    draw = ImageDraw.Draw(image)
-    draw.rectangle((10, 10, WIDTH - 11, HEIGHT - 11), outline=DIM, width=1)
-    draw.rectangle((16, 16, WIDTH - 17, HEIGHT - 17), outline="#1f2937", width=1)
-    draw_corner(draw, 20, 20, 1, 1)
-    draw_corner(draw, WIDTH - 21, 20, -1, 1)
-    draw_corner(draw, 20, HEIGHT - 21, 1, -1)
-    draw_corner(draw, WIDTH - 21, HEIGHT - 21, -1, -1)
-
-    draw.text((24, 28), "VISUAL.MAP", fill=TEXT, font=FONT_12)
-    draw.text((213, 30), "300x340", fill=MUTED, font=FONT_9)
-    draw.text((248, 30), "1-BIT", fill=BORDER, font=FONT_9)
-    draw.line((24, 45, WIDTH - 25, 45), fill="#263241", width=1)
-
-    for gx in range(0, GRID_W, 4):
-        x = MAP_X + gx * CELL
-        draw.line((x, MAP_Y - 6, x, MAP_Y + GRID_H * CELL + 2), fill="#111d2b", width=1)
-    for gy in range(0, GRID_H, 4):
-        y = MAP_Y + gy * CELL
-        draw.line((MAP_X - 6, y, MAP_X + GRID_W * CELL + 2, y), fill="#111d2b", width=1)
-
-    draw.line((24, 278, WIDTH - 25, 278), fill="#263241", width=1)
-    draw.text((24, 290), "PTS 18000", fill=TEXT, font=FONT_10)
-    draw.text((102, 290), "·", fill=BORDER, font=FONT_10)
-    draw.text((118, 290), "FS/SERPENTINE", fill=TEXT, font=FONT_10)
-    draw.text((24, 307), "SCAN LOOP: ON", fill=MUTED, font=FONT_9)
-    draw.text((191, 307), "fguzman-stack", fill=BORDER, font=FONT_9)
-    return image
 
 
 def dot_xy(gx: int, gy: int) -> tuple[int, int]:
     return MAP_X + gx * CELL, MAP_Y + gy * CELL
 
 
-def draw_frame(base: Image.Image, ordered: list[tuple[int, int]], frame: int, total: int) -> Image.Image:
-    image = base.copy()
-    glow = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
-    glow_draw = ImageDraw.Draw(glow)
+def draw_corner(draw: ImageDraw.ImageDraw, x: int, y: int, sx: int, sy: int) -> None:
+    draw.line((x, y, x + sx * 14, y), fill=BORDER, width=1)
+    draw.line((x, y, x, y + sy * 14), fill=BORDER, width=1)
+
+
+def draw_base() -> Image.Image:
+    image = Image.new("RGB", (WIDTH, HEIGHT), BG)
     draw = ImageDraw.Draw(image)
 
-    progress = frame / total
-    wave = (math.sin(progress * math.tau) + 1) / 2
-    visible_count = int(len(ordered) * progress)
-    tail = 26
+    draw.rounded_rectangle((8, 8, WIDTH - 9, HEIGHT - 9), radius=0, fill=PANEL, outline="#273348")
+    draw.rectangle((15, 15, WIDTH - 16, HEIGHT - 16), outline="#334155")
+    draw_corner(draw, 21, 21, 1, 1)
+    draw_corner(draw, WIDTH - 22, 21, -1, 1)
+    draw_corner(draw, 21, HEIGHT - 22, 1, -1)
+    draw_corner(draw, WIDTH - 22, HEIGHT - 22, -1, -1)
 
-    for index, (gx, gy) in enumerate(ordered):
+    draw.text((24, 27), "VISUAL.MAP", fill=TEXT, font=FONT_12)
+    draw.text((212, 30), "300x340", fill=MUTED, font=FONT_8)
+    draw.text((250, 30), "1-BIT", fill=BORDER, font=FONT_8)
+    draw.line((24, 44, WIDTH - 25, 44), fill="#334155")
+
+    for gx in range(GRID_W + 1):
+        x = MAP_X + gx * CELL
+        color = GRID_HOT if gx % 8 == 0 else GRID
+        draw.line((x, MAP_Y - 4, x, MAP_Y + GRID_H * CELL), fill=color)
+    for gy in range(GRID_H + 1):
+        y = MAP_Y + gy * CELL
+        color = GRID_HOT if gy % 8 == 0 else GRID
+        draw.line((MAP_X - 4, y, MAP_X + GRID_W * CELL, y), fill=color)
+
+    draw.text((25, 255), "KERNEL//PULSE", fill=BORDER, font=FONT_9)
+    draw.text((181, 255), "MODE: SERPENT", fill=MUTED, font=FONT_9)
+    draw.line((24, 276, WIDTH - 25, 276), fill="#334155")
+    draw.text((24, 289), "PTS 18000", fill=TEXT, font=FONT_10)
+    draw.text((101, 289), "·", fill=BORDER, font=FONT_10)
+    draw.text((117, 289), "FS/SERPENTINE", fill=TEXT, font=FONT_10)
+    draw.text((24, 307), "SCAN LOOP: ON", fill=MUTED, font=FONT_9)
+    draw.text((186, 307), "fguzman-stack", fill=BORDER, font=FONT_9)
+    return image
+
+
+def palette_for(part: str, intensity: float) -> str:
+    if part == "eye":
+        return CYAN if intensity > 0.5 else "#28606a"
+    if part == "beak":
+        return AMBER if intensity > 0.5 else "#6a501a"
+    if part == "hot":
+        return HOT if intensity > 0.72 else "#ff9ad0"
+    if part == "soft":
+        return "#ff8ac7" if intensity > 0.55 else NEON_SOFT
+    return NEON if intensity > 0.5 else NEON_DIM
+
+
+def draw_frame(base: Image.Image, ordered: list[tuple[int, int, str]], frame: int, total: int) -> Image.Image:
+    image = base.copy().convert("RGBA")
+    draw = ImageDraw.Draw(image)
+    glow = Image.new("RGBA", (WIDTH, HEIGHT), (0, 0, 0, 0))
+    glow_draw = ImageDraw.Draw(glow)
+
+    count = len(ordered)
+    head = int((frame / total) * count)
+    tail = 92
+    pulse = (math.sin((frame / total) * math.tau) + 1) / 2
+
+    # Dim full logo is always present; the moving window redraws it hot.
+    for index, (gx, gy, part) in enumerate(ordered):
         x, y = dot_xy(gx, gy)
-        if index < visible_count:
-            age = max(0, visible_count - index)
-            if age < tail:
-                color = NEON_HOT
-                radius = DOT + 1
-            else:
-                color = NEON
-                radius = DOT
-            glow_draw.ellipse((x - 4, y - 4, x + 4, y + 4), fill=(255, 79, 184, 45))
-            draw.rectangle((x - radius, y - radius, x + radius, y + radius), fill=color)
+        distance = (head - index) % count
+        in_tail = distance < tail
+        sparkle = (index * 17 + frame * 11) % 97 == 0
+        intensity = 1.0 - (distance / tail) if in_tail else 0.18 + pulse * 0.05
+        color = palette_for(part, intensity)
+        radius = DOT + (1 if in_tail and distance < 18 else 0)
+
+        if in_tail:
+            glow_draw.ellipse((x - 5, y - 5, x + 5, y + 5), fill=(255, 79, 184, 34 + int(50 * intensity)))
+        if sparkle:
+            draw.line((x - 3, y, x + 3, y), fill=HOT)
+            draw.line((x, y - 3, x, y + 3), fill=HOT)
         else:
-            draw.point((x, y), fill="#352136")
+            draw.rectangle((x - radius, y - radius, x + radius, y + radius), fill=color)
 
-    scan_index = min(visible_count, len(ordered) - 1)
-    if ordered:
-        sx, sy = dot_xy(*ordered[scan_index])
-        draw.rectangle((sx - 6, sy - 6, sx + 6, sy + 6), outline=NEON_HOT, width=1)
-        draw.line((MAP_X - 10, sy, MAP_X + GRID_W * CELL + 6, sy), fill="#3b2942", width=1)
+    sx, sy, _ = ordered[head % count]
+    scan_x, scan_y = dot_xy(sx, sy)
+    draw.rectangle((scan_x - 6, scan_y - 6, scan_x + 6, scan_y + 6), outline=HOT)
+    draw.line((MAP_X - 8, scan_y, MAP_X + GRID_W * CELL + 4, scan_y), fill="#3b2942")
+    draw.line((scan_x, MAP_Y - 7, scan_x, MAP_Y + GRID_H * CELL + 3), fill="#26364f")
 
-    noise_y = int(MAP_Y + wave * GRID_H * CELL)
-    draw.line((30, noise_y, WIDTH - 31, noise_y), fill="#182033", width=1)
+    # Subtle CRT jitter/glitch bars.
+    for offset in (0, 41, 83):
+        gy = MAP_Y + ((frame * 3 + offset) % (GRID_H * CELL))
+        draw.line((25, gy, WIDTH - 26, gy), fill="#111827")
 
-    blurred = glow.filter(ImageFilter.GaussianBlur(3))
-    image = Image.alpha_composite(image.convert("RGBA"), blurred)
-    image = Image.alpha_composite(image, glow)
-    return image.convert("P", palette=Image.Palette.ADAPTIVE, colors=64)
+    image = Image.alpha_composite(image, glow.filter(ImageFilter.GaussianBlur(3)))
+    return image.convert("P", palette=Image.Palette.ADAPTIVE, colors=96)
 
 
-def generate(points: list[tuple[int, int]], output: Path, frames: int, duration: int) -> None:
+def generate(points: list[tuple[int, int, str]], output: Path, frames: int, duration: int) -> None:
     ordered = serpentine(points)
+    if not ordered:
+        raise SystemExit("No points found. Try a higher-contrast input image.")
     base = draw_base()
     images = [draw_frame(base, ordered, frame, frames) for frame in range(frames)]
     output.parent.mkdir(parents=True, exist_ok=True)
@@ -206,13 +301,11 @@ def main() -> None:
     parser = argparse.ArgumentParser(description="Generate a VISUAL.MAP retro GIF.")
     parser.add_argument("--input", type=Path, help="Optional logo/image used as the particle mask.")
     parser.add_argument("--output", type=Path, default=Path("assets/visual-map-tux.gif"))
-    parser.add_argument("--frames", type=int, default=72)
-    parser.add_argument("--duration", type=int, default=45, help="Frame duration in ms.")
+    parser.add_argument("--frames", type=int, default=96)
+    parser.add_argument("--duration", type=int, default=38, help="Frame duration in ms.")
     args = parser.parse_args()
 
     points = points_from_image(args.input) if args.input else default_points()
-    if not points:
-        raise SystemExit("No points found. Try an image with more contrast or alpha.")
     generate(points, args.output, args.frames, args.duration)
     print(f"Generated {args.output} ({len(points)} particles, {args.frames} frames)")
 
