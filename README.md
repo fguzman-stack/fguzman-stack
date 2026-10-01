@@ -1,76 +1,162 @@
 <div align="center">
 
-<img src="https://readme-typing-svg.demolab.com?font=Orbitron&weight=800&size=30&duration=3000&pause=400&color=9B7BFF&center=true&vCenter=true&width=640&lines=%3C+Hola!+Soy+Francisco+%2F%3E;Desarrollador+de+Software+%7C+Chile;Android+%C2%B7+Web+%C2%B7+Windows+%C2%B7+IA+local" alt="Hola, soy Francisco" />
+<a href="https://github.com/fguzman-stack">
+  <img src="https://capsule-render.vercel.app/api?type=waving&height=180&color=0:111827,45:7C3AED,100:06B6D4&text=Francisco%20Guzman&fontColor=FFFFFF&fontSize=42&fontAlignY=36&desc=Android%20%7C%20Web%20%7C%20IA%20local%20%7C%20Chile&descAlignY=58&descSize=16" alt="Francisco Guzman - Android, Web e IA local" />
+</a>
 
-[![Portafolio](https://img.shields.io/badge/Portafolio-miportafolio--fguz.vercel.app-9B7BFF?style=for-the-badge&logo=vercel&logoColor=white)](https://miportafolio-fguz.vercel.app/)
-[![Email](https://img.shields.io/badge/Email-Contacto-FF63B8?style=for-the-badge&logo=gmail&logoColor=white)](mailto:familiazv2016@gmail.com)
+<a href="https://github.com/fguzman-stack">
+  <img src="https://readme-typing-svg.demolab.com?font=JetBrains+Mono&weight=700&size=24&duration=2600&pause=850&color=67E8F9&center=true&vCenter=true&width=900&lines=Desarrollador+de+software+desde+Chile;Kotlin+%2B+Jetpack+Compose+para+Android;React+%2B+Vite+%2B+Tailwind+para+productos+web;Offline-first+%E2%80%A2+Privacidad+%E2%80%A2+IA+local" alt="Typing SVG" />
+</a>
+
+<p>
+  <a href="https://miportafolio-fguz.vercel.app/">
+    <img src="https://img.shields.io/badge/Portfolio-miportafolio--fguz.vercel.app-7C3AED?style=for-the-badge&logo=vercel&logoColor=white" alt="Portfolio" />
+  </a>
+  <a href="mailto:familiazv2016@gmail.com">
+    <img src="https://img.shields.io/badge/Email-contacto-06B6D4?style=for-the-badge&logo=gmail&logoColor=white" alt="Email" />
+  </a>
+  <img src="https://komarev.com/ghpvc/?username=fguzman-stack&style=for-the-badge&color=7C3AED&label=profile+views" alt="Profile views" />
+</p>
 
 </div>
 
-## Sobre mí / About me
+---
 
-**🇨🇱 Español:** Desarrollador desde Chile. Construyo **apps Android nativas** (Kotlin + Jetpack Compose), **sistemas web** con identidad propia (React 19 + Vite + Tailwind 4) y **software Windows con IA local** (en desarrollo). Me importa la calidad visual, el offline-first y la privacidad. Abierto a colaboraciones LATAM y proyectos freelance.
+## `$ whoami`
 
-**🇺🇸 English:** Software developer from Chile. I build native Android apps (Kotlin + Jetpack Compose), crafted web experiences (React 19 + Vite + Tailwind 4) and Windows software with local AI (in progress). I care about interface quality, offline-first design and privacy.
-
-## Proyectos destacados
-
-| Proyecto | Stack | Qué hace |
-|----------|-------|----------|
-| [CodePet](https://github.com/fguzman-stack/CodePet) | Kotlin · Compose · Room · Koin | 🐾 Mascota virtual que evoluciona mientras programas: Pomodoro, 88+ retos, 100% offline |
-| [A Tiempo](https://github.com/fguzman-stack/ATiempo---informacion) | Kotlin · Compose · Firebase | Organiza tu día: recordatorios, hábitats, diario y widget |
-| [Despensa al Día](https://github.com/fguzman-stack) | Kotlin · Compose · Firebase AI | Combate el desperdicio con recetas generadas por IA |
-| [MiPresentacion](https://github.com/fguzman-stack/MiPresentacion) | React · Vite · Tailwind · TS | 🌌 Este portafolio: mapa de constelaciones, i18n ES/EN/PT/FR |
-| [DocuMind AI](https://github.com/fguzman-stack/DocuMind-Ai-Web) | Python · IA local | 🧠 Documentos con IA 100% local (Windows, en proceso) |
-
-## Colaboraciones open source / OSS contributions
-
-**🇨🇱 Contribuyo activamente a proyectos open source de terceros** — leyendo código, encontrando bugs reproducibles y enviando PRs verificados.
-**🇺🇸 Actively contributing to third-party open source** — reading unfamiliar code, finding reproducible bugs, and shipping verified PRs.
-
-| Repo | Aporte | Estado |
-|------|--------|--------|
-| [DDOneApps/Phony](https://github.com/DDOneApps/Phony) | Metadata F-Droid para publicar la app 2.6 (#62) · fix comando ADB Calling Accounts en Android 17+ (#63 (#7)) · iconos `AutoMirrored` para soporte RTL (#64) | [PRs abiertos](https://github.com/DDOneApps/Phony/pulls?q=is%3Apr+author%3Afguzman-stack) |
-| [legalize-dev/legalize-pipeline](https://github.com/legalize-dev/legalize-pipeline) ([proyecto](https://github.com/legalize-dev/legalize-es) 🇪🇸 — 12 000+ leyes españolas en git) | Suite de tests inutilizable en Windows (UTF-8 vs cp1252): 13 fixes de encoding, 0 → 2014 tests pasando (#137) · triage de 30 fallos restantes Windows con causas raíz (#138) | [PR + issue](https://github.com/legalize-dev/legalize-pipeline/pull/137) |
-
-## Stack
-
+```yaml
+name: Francisco Guzman
+location: Chile
+role: Software Developer
+focus:
+  - Android nativo con Kotlin, Jetpack Compose y arquitectura offline-first
+  - Productos web con React, Vite, TypeScript y Tailwind CSS
+  - Herramientas con IA local, privacidad y automatizacion practica
+currently_building:
+  - Apps Android utiles, sin friccion y orientadas a vida diaria
+  - Plantillas web/SaaS para negocios LATAM
+  - Experimentos con RAG local y software Windows
+open_to:
+  - Colaboraciones open source
+  - Proyectos freelance
+  - Productos mobile-first para LATAM
 ```
-Android   → Kotlin · Jetpack Compose · Room · Koin · Firebase · Widgets
-Frontend  → React 19 · TypeScript · Vite 6 · Tailwind CSS 4 · Framer Motion
-Backend   → Python · FastAPI · PHP · Firebase
-Desktop   → Windows apps con IA local (en desarrollo)
-```
-
-## Actividad
-
-<p align="center">
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/kotlin/kotlin-original.svg" width="48" height="48" alt="Kotlin" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/androidstudio/androidstudio-original.svg" width="48" height="48" alt="Android Studio" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/react/react-original.svg" width="48" height="48" alt="React" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/typescript/typescript-original.svg" width="48" height="48" alt="TypeScript" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/vitejs/vitejs-original.svg" width="48" height="48" alt="Vite" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/tailwindcss/tailwindcss-original.svg" width="48" height="48" alt="Tailwind CSS" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/firebase/firebase-original.svg" width="48" height="48" alt="Firebase" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/python/python-original.svg" width="48" height="48" alt="Python" />
-  <img src="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/git/git-original.svg" width="48" height="48" alt="Git" />
-</p>
-
-<p align="center">
-  <img src="https://img.shields.io/github/followers/fguzman-stack?style=for-the-badge&logo=github&labelColor=0d1117&color=9B7BFF" alt="Followers" />
-  <img src="https://img.shields.io/github/stars/fguzman-stack/MiPresentacion?style=for-the-badge&label=stars%20portafolio&color=9B7BFF" alt="Stars portafolio" />
-  <img src="https://img.shields.io/github/stars/fguzman-stack/CodePet?style=for-the-badge&label=stars%20CodePet&color=54DCFF" alt="Stars CodePet" />
-  <img src="https://img.shields.io/github/last-commit/fguzman-stack/MiPresentacion?style=for-the-badge&label=ultimo%20commit&color=FF63B8" alt="Ultimo commit" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=fguzman-stack&show_icons=true&count_private=true&theme=tokyonight&hide_border=true&title_color=9B7BFF&icon_color=FF63B8" alt="GitHub stats" height="160" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=fguzman-stack&layout=compact&theme=tokyonight&hide_border=true&title_color=9B7BFF&langs_count=8" alt="Top langs" height="160" />
-</p>
 
 ---
 
-<p align="center">
-  <sub>Hecho con 💜 desde Chile · Portfolio: <a href="https://miportafolio-fguz.vercel.app/">miportafolio-fguz.vercel.app</a></sub>
+## `$ cat tech-stack.yaml`
+
+<div align="center">
+
+<table>
+  <thead>
+    <tr>
+      <th align="left" colspan="2"><code>fguzman-stack:~$ cat tech-stack.yaml</code></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td width="50%" valign="top">
+        <code>mobile_android:</code><br><br>
+        <img src="https://skillicons.dev/icons?i=kotlin,androidstudio,gradle,firebase" alt="Kotlin, Android Studio, Gradle, Firebase" /><br>
+        <sub><code>Kotlin · Jetpack Compose · Room · Koin · Firebase · Material 3</code></sub>
+      </td>
+      <td width="50%" valign="top">
+        <code>frontend_web:</code><br><br>
+        <img src="https://skillicons.dev/icons?i=react,ts,js,vite,tailwind,astro,nextjs" alt="React, TypeScript, JavaScript, Vite, Tailwind, Astro, Next.js" /><br>
+        <sub><code>React · TypeScript · Vite · Tailwind CSS · Astro · Next.js</code></sub>
+      </td>
+    </tr>
+    <tr>
+      <td valign="top">
+        <code>backend_ai:</code><br><br>
+        <img src="https://skillicons.dev/icons?i=python,fastapi,nodejs,express,sqlite" alt="Python, FastAPI, Node.js, Express, SQLite" /><br>
+        <sub><code>Python · FastAPI · Node.js · Express · SQLite · RAG local</code></sub>
+      </td>
+      <td valign="top">
+        <code>workflow_tools:</code><br><br>
+        <img src="https://skillicons.dev/icons?i=git,github,githubactions,vercel,vscode" alt="Git, GitHub, GitHub Actions, Vercel, VS Code" /><br>
+        <sub><code>Git · GitHub · GitHub Actions · Vercel · GitHub Pages</code></sub>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="2"><code>status: building_publicly · region: LATAM · mode: offline-first</code></td>
+    </tr>
+  </tfoot>
+</table>
+
+</div>
+
+---
+
+## `$ ls featured-projects/`
+
+<div align="center">
+
+| Proyecto | Stack | Enfoque |
+| --- | --- | --- |
+| [CodePet](https://github.com/fguzman-stack/CodePet) | Kotlin · Jetpack Compose · Room · Koin | Mascota virtual para programadores con Pomodoro, retos y juegos offline |
+| [Despensa al Dia](https://github.com/fguzman-stack/Despensadeldia) | Kotlin · Jetpack Compose · Room · ML Kit | Gestion de despensa offline-first para reducir desperdicio de alimentos |
+| [ATiempo](https://github.com/fguzman-stack/ATiempo) | Kotlin · Jetpack Compose | Recordatorios y habitos 100% locales, sin cuentas ni telemetria |
+| [AetherDown](https://github.com/fguzman-stack/AetherDown) | Kotlin · Material 3 | Descargador de archivos para Android con interfaz moderna |
+| [MiPresentacion](https://github.com/fguzman-stack/MiPresentacion) | React · Vite · Tailwind · TypeScript | Portfolio web con identidad visual, i18n y enfoque mobile-first |
+| [DocuMind AI](https://github.com/fguzman-stack/DocuMind-Ai-Web) | IA local · RAG · Web | Interfaz para analisis privado de documentos con IA local |
+
+</div>
+
+---
+
+## `$ git log --open-source --oneline`
+
+<div align="center">
+
+| Repo | Aporte | Estado |
+| --- | --- | --- |
+| [DDOneApps/Phony](https://github.com/DDOneApps/Phony) | Metadata F-Droid, soporte Android 17+ y mejoras RTL con iconos <code>AutoMirrored</code> | [PRs](https://github.com/DDOneApps/Phony/pulls?q=is%3Apr+author%3Afguzman-stack) |
+| [legalize-dev/legalize-pipeline](https://github.com/legalize-dev/legalize-pipeline) | Fixes de encoding en Windows: suite de tests de 0 a 2014 tests pasando, mas triage de fallos restantes | [PR #137](https://github.com/legalize-dev/legalize-pipeline/pull/137) |
+
+</div>
+
+---
+
+## `$ github status --summary`
+
+<div align="center">
+
+<p>
+  <img src="https://img.shields.io/github/followers/fguzman-stack?style=for-the-badge&logo=github&labelColor=111827&color=7C3AED" alt="GitHub followers" />
+  <img src="https://img.shields.io/github/stars/fguzman-stack/CodePet?style=for-the-badge&label=CodePet&labelColor=111827&color=06B6D4" alt="CodePet stars" />
+  <img src="https://img.shields.io/github/stars/fguzman-stack/Despensadeldia?style=for-the-badge&label=Despensa&labelColor=111827&color=22C55E" alt="Despensa al Dia stars" />
+  <img src="https://img.shields.io/github/last-commit/fguzman-stack/CodePet?style=for-the-badge&label=last%20commit&labelColor=111827&color=F59E0B" alt="Last commit" />
 </p>
 
+<p>
+  <img src="https://github-readme-stats.vercel.app/api?username=fguzman-stack&show_icons=true&count_private=true&theme=tokyonight&hide_border=true&title_color=67E8F9&icon_color=A78BFA" alt="GitHub stats" height="165" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=fguzman-stack&layout=compact&theme=tokyonight&hide_border=true&title_color=67E8F9&langs_count=8" alt="Top languages" height="165" />
+</p>
+
+</div>
+
+---
+
+## `$ connect --socials`
+
+<div align="center">
+
+<a href="https://miportafolio-fguz.vercel.app/">
+  <img src="https://img.shields.io/badge/Portfolio-111827?style=for-the-badge&logo=vercel&logoColor=67E8F9" alt="Portfolio" />
+</a>
+<a href="mailto:familiazv2016@gmail.com">
+  <img src="https://img.shields.io/badge/Email-111827?style=for-the-badge&logo=gmail&logoColor=F472B6" alt="Email" />
+</a>
+<a href="https://github.com/fguzman-stack">
+  <img src="https://img.shields.io/badge/GitHub-111827?style=for-the-badge&logo=github&logoColor=white" alt="GitHub" />
+</a>
+
+<br><br>
+
+<sub><code>Hecho desde Chile · construyendo apps utiles, privadas y offline-first</code></sub>
+
+</div>
