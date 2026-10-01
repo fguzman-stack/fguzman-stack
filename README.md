@@ -22,6 +22,12 @@
 
 ---
 
+<p align="center">
+  <img src="assets/visual-map-tux.gif" width="300" height="340" alt="VISUAL.MAP retro 1-bit Tux particle scan" />
+</p>
+
+---
+
 ## `$ whoami`
 
 ```yaml
